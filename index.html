@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="lib/json2/json2.js"></script>
+
+    <script src="res/NtPage.js"></script>
+    <script src="res/NtFrame.js"></script>
+    <script src="res/NtContainer.js"></script>
+    <script src="res/NtWidget.js"></script>
+  
+    <script type="text/javascript">
+      $(function(){
+        page = new NtPage();
+        page.setup();
+      });
+    </script>
+
+
+    <style type="text/css">
+      body{
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      a{
+        cursor:pointer;
+      }
+
+      .container-wrapper{
+        border:1px solid #000;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <iframe src="lib/proxy/ba-simple-proxy.php?url=http://example.com&amp;mode=native"></iframe>
+    <a class="add-container">Add Container</a>
+
+                                                                                                                                                                                          
+  </body>
+</html>
