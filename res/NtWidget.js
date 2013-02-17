@@ -15,10 +15,11 @@ var NtWidget = (function($) {
 
     $.extend(this.defaults, inOptions);
     this.options = inOptions;
-
-    this.renderElements = [];
-    this.$container = $('<div>test</div>');
-    this.hideContainer();
+    
+    this.$container = $('<div></div>')
+      .text(this.options.label);
+    
+    this.createInputWidget();
 
   };
 
@@ -56,6 +57,76 @@ var NtWidget = (function($) {
    */
   NtWidget.prototype.getContainer = function() {
     return this.$container;
+  }
+
+  /**
+   * Create an input widget for the user to enter some data.
+   */
+  NtWidget.prototype.createInputWidget = function() {
+    
+    var self = this;
+    var currentValue = this.getValue();
+    var type = typeof currentValue;
+
+    switch(type) {
+      case 'number':
+        self.createSliderWidget();
+        break;
+      case 'string':
+        self.createTextWidget();
+        break;
+    }
+  }
+
+
+  /**
+   * Create a text widget to capture data from the user. This could
+   * have been a great place for sub-classing.
+   * @todo refactor for sub-classing.
+   */
+  NtWidget.prototype.createTextWidget = function() {
+    var currentValue = this.getValue();
+    var self = this;    
+    var $input = $('<input/>')
+      .attr('type', 'text')
+      .val(currentValue);
+    
+    self.$container.append($input);
+    
+    $input.bind('change', function(){
+      self.setValue($(this).val());
+    });
+  }
+
+
+  /**
+   * Create a slider based widget for altering this current widgets
+   * value.
+   */
+  NtWidget.prototype.createSliderWidget = function() {
+    
+    var currentValue = this.getValue();
+    var self = this;
+
+    var $slideInput = $('<input/>')
+      .attr('type', 'slider')
+      .attr('id', 'test-slider')
+      .attr('value', currentValue);
+
+    console.log($slideInput);
+
+    self.$container.append($slideInput);
+
+    $slideInput.slider({
+        from: 20,
+        to: 100,
+        step: 10,
+        dimension: '%',
+        onstatechange : function(value) {
+          self.setValue(value);
+        }
+    });
+
   }
 
   return NtWidget;

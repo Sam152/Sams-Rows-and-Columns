@@ -2,9 +2,12 @@
 <html lang="en">
   <head>
     <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link href="lib/jslider/bin/jquery.slider.min.css" rel="stylesheet">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.js"></script>
     <script src="lib/json2/json2.js"></script>
+    <script src="lib/jslider/bin/jquery.slider.min.js"></script>
 
     <script src="res/NtPage.js"></script>
     <script src="res/NtFrame.js"></script>
@@ -27,6 +30,20 @@
       body{
         -webkit-user-select: none;
         user-select: none;
+        padding: 70px 10px 10px 20px;
+        box-sizing: border-box;
+      }
+
+      #ui{
+        position:absolute;
+        top:0;
+        left:0;
+        background-color:#eee;
+        height:50px;
+        width:100%;
+        padding:10px 0 0 10px;
+        box-sizing:border-box;
+        border-bottom: 1px solid #999;
       }
 
       a{
@@ -34,19 +51,36 @@
       }
 
       .container-wrapper{
-        border:1px solid #000;
+        box-sizing:border-box;
+        margin: 0 20px 20px 0;
+        border: 1px solid #999;
+        background-color: #EEE;
       }
 
-      .edit{
+      .container-wrapper .widgets{
+        background-color:#eee;
+        border:1px solid #f00;
+      }
+
+      .container-wrapper .widgets{
+        width:200px;
+      }
+
+      .container-wrapper .edit{
         cursor:pointer;
       }
+
     </style>
 
   </head>
   <body>
 
-    <a class="add-container">Add Container</a>
-
+    <div id="ui">
+      <a class="add-container btn">
+        <i class="icon-plus-sign"></i>
+        Add Container
+      </a>
+    </div>
                                                                                                                                                                                           
   </body>
 </html>

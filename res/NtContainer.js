@@ -38,6 +38,7 @@ var NtContainer = (function($) {
     this.widgets = [];
     this.addWidget('cols', 'Columns');
     this.addWidget('rows', 'Rows');
+    this.addWidget('url', 'Url');
   }
 
 
@@ -46,7 +47,11 @@ var NtContainer = (function($) {
    */
   NtContainer.prototype.createElements = function() {
     var self = this;
-    this.$wrapper = $('<div></div>');
+    this.$wrapper = $('<div></div>')
+      .addClass('container-wrapper');
+    this.$widgets = $('<div></div>')
+      .addClass('widgets')
+      .hide();
 
     this.$edit = $('<div>Edit</div>')
       .addClass('edit')
@@ -54,7 +59,9 @@ var NtContainer = (function($) {
         self.editSettings.call(self)
       });
 
-    this.$wrapper.append(this.$edit);
+    this.$wrapper
+      .append(this.$edit)
+      .append(this.$widgets);
   }
 
 
@@ -63,9 +70,8 @@ var NtContainer = (function($) {
    */
   NtContainer.prototype.applySettings = function() {
     this.$wrapper
-      .addClass('container-wrapper')
-      .css('height', (this.options.cols * 5) + '%')
-      .css('width', (this.options.rows * 5) + '%');
+      .css('height', (this.options.rows) + '%')
+      .css('width', (this.options.cols) + '%');
   }
 
 
@@ -82,7 +88,7 @@ var NtContainer = (function($) {
     });
 
     this.widgets.push(newWidget);
-    this.$wrapper.append(newWidget.getContainer());
+    this.$widgets.append(newWidget.getContainer());
   }
 
 
@@ -93,9 +99,7 @@ var NtContainer = (function($) {
     var self = this;
     this.$wrapper.addClass('edit-mode');
 
-    $.each(this.widgets, function(i, widget){
-      widget.showContainer();
-    });
+    this.$widgets.show();
 
     this.$edit.text('Done');
 
@@ -115,9 +119,7 @@ var NtContainer = (function($) {
     var self = this;
     this.$wrapper.removeClass('edit-mode');
 
-    $.each(self.widgets, function(i, widget){
-      widget.hideContainer();
-    });
+    this.$widgets.hide();
 
     this.$edit.text('Edit');
     this.$edit
