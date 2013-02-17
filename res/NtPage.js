@@ -17,9 +17,8 @@ var NtPage = (function($) {
 
   NtPage.prototype.createContainer = function() {
     var newContainer = new NtContainer();
-    newContainer.render();
+    $('body').append(newContainer.getWrapper());
     self.containers.push(newContainer);
-
   };
 
   NtPage.prototype.exportConfigurationLink = function() {
@@ -28,10 +27,6 @@ var NtPage = (function($) {
 
   NtPage.prototype.readConfigurationLink = function() {
     
-  };
-
-  NtPage.prototype.render = function() {
-
   };
 
   return NtPage;
