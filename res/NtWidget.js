@@ -17,7 +17,8 @@ var NtWidget = (function($) {
     this.options = inOptions;
     
     this.$container = $('<div></div>')
-      .text(this.options.label);
+      .text(this.options.label)
+      .addClass('widget');
     
     this.createInputWidget();
 
@@ -68,6 +69,8 @@ var NtWidget = (function($) {
     var currentValue = this.getValue();
     var type = typeof currentValue;
 
+    this.$container.addClass('widget-' + type);
+
     switch(type) {
       case 'number':
         self.createSliderWidget();
@@ -108,12 +111,12 @@ var NtWidget = (function($) {
     var currentValue = this.getValue();
     var self = this;
 
+    var $body = $('body');
+
     var $slideInput = $('<input/>')
       .attr('type', 'slider')
       .attr('id', 'test-slider')
       .attr('value', currentValue);
-
-    console.log($slideInput);
 
     self.$container.append($slideInput);
 
@@ -124,6 +127,7 @@ var NtWidget = (function($) {
         dimension: '%',
         onstatechange : function(value) {
           self.setValue(value);
+          $body.trigger('container_reflow');
         }
     });
 

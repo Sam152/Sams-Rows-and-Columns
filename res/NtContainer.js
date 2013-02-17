@@ -49,6 +49,8 @@ var NtContainer = (function($) {
     var self = this;
     this.$wrapper = $('<div></div>')
       .addClass('container-wrapper');
+    this.$innerWrapper = $('<div></div>')
+      .addClass('inner-wrapper');
     this.$widgets = $('<div></div>')
       .addClass('widgets')
       .hide();
@@ -60,6 +62,8 @@ var NtContainer = (function($) {
       });
 
     this.$wrapper
+      .append(this.$innerWrapper);
+    this.$innerWrapper
       .append(this.$edit)
       .append(this.$widgets);
   }
